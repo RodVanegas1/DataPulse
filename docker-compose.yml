@@ -1,0 +1,42 @@
+services:
+  api:
+    build: .
+    command: sh -c "npx prisma db push && npm run prisma:seed && npm run start"
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: ${PORT:-4000}
+      API_PREFIX: ${API_PREFIX:-/api/v1}
+      APP_NAME: ${APP_NAME:-Territorial Intelligence Platform API}
+      APP_VERSION: ${APP_VERSION:-0.1.0}
+      DATABASE_URL: ${DATABASE_URL:-mysql://tip_user:tip_password@mysql:3306/territorial_intelligence}
+      CORS_ORIGIN: ${CORS_ORIGIN:-*}
+      RATE_LIMIT_WINDOW_MS: ${RATE_LIMIT_WINDOW_MS:-60000}
+      RATE_LIMIT_MAX: ${RATE_LIMIT_MAX:-120}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      AI_PROVIDER: ${AI_PROVIDER:-mock}
+    ports:
+      - "${PORT:-4000}:4000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: territorial_intelligence
+      MYSQL_USER: tip_user
+      MYSQL_PASSWORD: tip_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:
