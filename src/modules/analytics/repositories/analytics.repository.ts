@@ -53,4 +53,44 @@ export class AnalyticsRepository {
       take: 10,
     });
   }
+
+  regionalComparison() {
+    return prisma.department.findMany({
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+        indicators: { orderBy: { updatedAt: 'desc' }, take: 12 },
+        statistics: { orderBy: { updatedAt: 'desc' }, take: 12 },
+        _count: { select: { places: true, municipalities: true } },
+      },
+      orderBy: { name: 'asc' },
+    });
+  }
+
+  heatmapPlaces() {
+    return prisma.touristPlace.findMany({
+      where: { status: 'PUBLISHED' },
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+        latitude: true,
+        longitude: true,
+        rating: true,
+        featured: true,
+        category: { select: { name: true, slug: true } },
+        department: { select: { name: true, slug: true } },
+        municipality: { select: { name: true, slug: true } },
+      },
+    });
+  }
+
+  recentDatasets() {
+    return prisma.dataset.findMany({ where: { public: true }, orderBy: { createdAt: 'desc' }, take: 8 });
+  }
+
+  recentReports() {
+    return prisma.report.findMany({ orderBy: { createdAt: 'desc' }, take: 8, include: { dataset: true } });
+  }
 }

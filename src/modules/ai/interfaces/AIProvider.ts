@@ -2,6 +2,8 @@ export interface AIRequest {
   prompt: string;
   context?: Record<string, unknown>;
   language?: 'es' | 'en' | 'fr' | 'pt';
+  conversationId?: string;
+  memory?: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>;
 }
 
 export interface AIResponse {

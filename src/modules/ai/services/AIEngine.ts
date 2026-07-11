@@ -19,9 +19,12 @@ export class AIEngine {
   private resolveProvider(): AIProvider {
     switch (config.AI_PROVIDER) {
       case 'openai':
+      case 'openrouter':
         return new OpenAIProvider();
       case 'gemini':
         return new GeminiProvider();
+      case 'ollama':
+      case 'lmstudio':
       case 'local':
         return new LocalProvider();
       case 'mock':

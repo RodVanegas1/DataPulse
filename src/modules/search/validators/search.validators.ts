@@ -4,6 +4,10 @@ import { paginationQuerySchema } from '../../../core/utils/pagination';
 export const searchQuerySchema = paginationQuerySchema.extend({
   q: z.string().min(1),
   type: z.enum(['all', 'places', 'departments', 'municipalities', 'categories', 'events', 'tags']).default('all'),
+  departmentSlug: z.string().optional(),
+  municipalitySlug: z.string().optional(),
+  categorySlug: z.string().optional(),
+  tags: z.string().optional(),
   latitude: z.coerce.number().optional(),
   longitude: z.coerce.number().optional(),
   radiusKm: z.coerce.number().positive().optional(),

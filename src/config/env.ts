@@ -15,7 +15,15 @@ const envSchema = z.object({
   RATE_LIMIT_WINDOW_MS: z.coerce.number().int().positive().default(60000),
   RATE_LIMIT_MAX: z.coerce.number().int().positive().default(120),
   LOG_LEVEL: z.string().default('info'),
-  AI_PROVIDER: z.enum(['mock', 'openai', 'gemini', 'local']).default('mock'),
+  AI_PROVIDER: z.enum(['mock', 'ollama', 'lmstudio', 'gemini', 'openrouter', 'local', 'openai']).default('mock'),
+  OLLAMA_BASE_URL: z.string().url().default('http://localhost:11434'),
+  OLLAMA_MODEL: z.string().default('llama3.1'),
+  LMSTUDIO_BASE_URL: z.string().url().default('http://localhost:1234'),
+  LMSTUDIO_MODEL: z.string().default('local-model'),
+  GEMINI_API_KEY: z.string().optional(),
+  GEMINI_MODEL: z.string().default('gemini-1.5-flash'),
+  OPENROUTER_API_KEY: z.string().optional(),
+  OPENROUTER_MODEL: z.string().default('meta-llama/llama-3.1-8b-instruct:free'),
 });
 
 const parsed = envSchema.safeParse(process.env);

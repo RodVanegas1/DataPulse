@@ -5,6 +5,10 @@ export interface SearchFilters {
   type: string;
   page: number;
   limit: number;
+  departmentSlug?: string;
+  municipalitySlug?: string;
+  categorySlug?: string;
+  tags?: string[];
   latitude?: number;
   longitude?: number;
   radiusKm?: number;

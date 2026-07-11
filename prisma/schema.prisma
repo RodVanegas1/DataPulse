@@ -134,6 +134,9 @@ model TouristPlace {
   @@index([featured])
   @@index([verified])
   @@index([status])
+  @@index([latitude, longitude])
+  @@index([rating])
+  @@index([createdAt])
 }
 
 model Layer {
@@ -204,6 +207,7 @@ model Indicator {
 
   @@index([departmentId])
   @@index([municipalityId])
+  @@index([period])
 }
 
 model Statistic {
