@@ -1,0 +1,306 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PlaceStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum EventStatus {
+  SCHEDULED
+  CANCELLED
+  COMPLETED
+}
+
+enum DatasetFormat {
+  CSV
+  EXCEL
+  JSON
+  GEOJSON
+  API
+}
+
+enum ExportFormat {
+  JSON
+  CSV
+  EXCEL
+  PDF
+  GEOJSON
+}
+
+model Department {
+  id             String         @id @default(cuid())
+  name           String         @unique
+  slug           String         @unique
+  code           String?        @unique
+  description    String?        @db.Text
+  latitude       Decimal?       @db.Decimal(10, 7)
+  longitude      Decimal?       @db.Decimal(10, 7)
+  boundaryGeojson Json?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  municipalities Municipality[]
+  places         TouristPlace[]
+  statistics     Statistic[]
+  indicators     Indicator[]
+}
+
+model Municipality {
+  id             String         @id @default(cuid())
+  departmentId   String
+  name           String
+  slug           String         @unique
+  code           String?        @unique
+  description    String?        @db.Text
+  latitude       Decimal?       @db.Decimal(10, 7)
+  longitude      Decimal?       @db.Decimal(10, 7)
+  boundaryGeojson Json?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  department     Department     @relation(fields: [departmentId], references: [id])
+  places         TouristPlace[]
+  statistics     Statistic[]
+  indicators     Indicator[]
+
+  @@index([departmentId])
+}
+
+model Category {
+  id          String         @id @default(cuid())
+  parentId    String?
+  name        String
+  slug        String         @unique
+  description String?        @db.Text
+  icon        String?
+  color       String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  parent      Category?      @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    Category[]     @relation("CategoryHierarchy")
+  places      TouristPlace[]
+
+  @@index([parentId])
+}
+
+model TouristPlace {
+  id             String        @id @default(cuid())
+  categoryId     String
+  departmentId   String
+  municipalityId String
+  name           String
+  slug           String        @unique
+  description    String?       @db.Text
+  history        String?       @db.Text
+  latitude       Decimal       @db.Decimal(10, 7)
+  longitude      Decimal       @db.Decimal(10, 7)
+  address        String?
+  openingHours   Json?
+  price          String?
+  website        String?
+  email          String?
+  phone          String?
+  socialMedia    Json?
+  rating         Decimal?      @db.Decimal(3, 2)
+  services       Json?
+  gallery        Json?
+  accessibility  Json?
+  parking        Boolean       @default(false)
+  wifi           Boolean       @default(false)
+  petFriendly    Boolean       @default(false)
+  verified       Boolean       @default(false)
+  featured       Boolean       @default(false)
+  status         PlaceStatus   @default(PUBLISHED)
+  geojson        Json?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  category       Category      @relation(fields: [categoryId], references: [id])
+  department     Department    @relation(fields: [departmentId], references: [id])
+  municipality   Municipality  @relation(fields: [municipalityId], references: [id])
+  media          Media[]
+  events         Event[]
+  tags           PlaceTag[]
+  languages      PlaceLanguage[]
+
+  @@index([categoryId])
+  @@index([departmentId])
+  @@index([municipalityId])
+  @@index([featured])
+  @@index([verified])
+  @@index([status])
+}
+
+model Layer {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?  @db.Text
+  type        String
+  source      String?
+  config      Json?
+  style       Json?
+  geojson     Json?
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Event {
+  id             String       @id @default(cuid())
+  touristPlaceId String?
+  title          String
+  slug           String       @unique
+  description    String?      @db.Text
+  startsAt       DateTime
+  endsAt         DateTime?
+  status         EventStatus  @default(SCHEDULED)
+  latitude       Decimal?     @db.Decimal(10, 7)
+  longitude      Decimal?     @db.Decimal(10, 7)
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  touristPlace   TouristPlace? @relation(fields: [touristPlaceId], references: [id])
+
+  @@index([touristPlaceId])
+  @@index([startsAt])
+}
+
+model Dataset {
+  id          String        @id @default(cuid())
+  name        String
+  slug        String        @unique
+  description String?       @db.Text
+  format      DatasetFormat
+  source      String?
+  schema      Json?
+  metadata    Json?
+  public      Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  reports     Report[]
+}
+
+model Indicator {
+  id             String        @id @default(cuid())
+  departmentId   String?
+  municipalityId String?
+  name           String
+  slug           String        @unique
+  description    String?       @db.Text
+  value          Decimal       @db.Decimal(18, 4)
+  unit           String?
+  period         String?
+  metadata       Json?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  department     Department?   @relation(fields: [departmentId], references: [id])
+  municipality   Municipality? @relation(fields: [municipalityId], references: [id])
+
+  @@index([departmentId])
+  @@index([municipalityId])
+}
+
+model Statistic {
+  id             String        @id @default(cuid())
+  departmentId   String?
+  municipalityId String?
+  key            String
+  value          Decimal       @db.Decimal(18, 4)
+  unit           String?
+  metadata       Json?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  department     Department?   @relation(fields: [departmentId], references: [id])
+  municipality   Municipality? @relation(fields: [municipalityId], references: [id])
+
+  @@index([departmentId])
+  @@index([municipalityId])
+  @@index([key])
+}
+
+model Media {
+  id             String       @id @default(cuid())
+  touristPlaceId String?
+  url            String
+  type           String
+  altText        String?
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  touristPlace   TouristPlace? @relation(fields: [touristPlaceId], references: [id])
+
+  @@index([touristPlaceId])
+}
+
+model Tag {
+  id          String     @id @default(cuid())
+  name        String
+  slug        String     @unique
+  description String?    @db.Text
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  places      PlaceTag[]
+}
+
+model Language {
+  id        String          @id @default(cuid())
+  code      String          @unique
+  name      String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  places    PlaceLanguage[]
+}
+
+model PlaceTag {
+  touristPlaceId String
+  tagId          String
+  touristPlace   TouristPlace @relation(fields: [touristPlaceId], references: [id], onDelete: Cascade)
+  tag            Tag          @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([touristPlaceId, tagId])
+}
+
+model PlaceLanguage {
+  touristPlaceId String
+  languageId     String
+  touristPlace   TouristPlace @relation(fields: [touristPlaceId], references: [id], onDelete: Cascade)
+  language       Language     @relation(fields: [languageId], references: [id], onDelete: Cascade)
+
+  @@id([touristPlaceId, languageId])
+}
+
+model Report {
+  id          String       @id @default(cuid())
+  datasetId   String?
+  name        String
+  slug        String       @unique
+  description String?      @db.Text
+  filters     Json?
+  metadata    Json?
+  summary     Json?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  dataset     Dataset?     @relation(fields: [datasetId], references: [id])
+  exports     Export[]
+
+  @@index([datasetId])
+}
+
+model Export {
+  id        String       @id @default(cuid())
+  reportId  String?
+  format    ExportFormat
+  url       String?
+  metadata  Json?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  report    Report?      @relation(fields: [reportId], references: [id])
+
+  @@index([reportId])
+}
