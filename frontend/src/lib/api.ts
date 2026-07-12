@@ -34,10 +34,14 @@ export const api = {
     return request<Dataset[]>('/datasets').catch(() => fallbackDatasets);
   },
   async reports(): Promise<Report[]> {
-    return request<{ dataset: Report[] } | Report[]>('/reports/tourism-places?format=json')
-      .then((data) => (Array.isArray(data) ? data : fallbackReports))
-      .catch(() => fallbackReports);
-  },
+  return request<{ dataset: Report[] } | Report[]>('/reports/tourism-places?format=json')
+    .then((data) => (Array.isArray(data) ? data : fallbackReports))
+    .catch(() => fallbackReports);
+},
+
+async tourism() {
+  return request('/tourism?limit=500');
+},
   async askAi(prompt: string, memory: Array<{ role: 'user' | 'assistant'; content: string }>) {
     return request<{ output: string; provider: string; metadata: Record<string, unknown> }>('/ai/generate', {
       method: 'POST',
