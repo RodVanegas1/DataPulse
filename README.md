@@ -346,8 +346,8 @@ Actualmente DataPulse administra información relacionada con:
 
 # Autor
 
-**Rodrigo Alberto Vanegas Santamaría**
-**Paúl Ronaldo Velá Coto**
+**Rodrigo Alberto Vanegas Santamaría** - 
+**Paúl Ronaldo Velá Coto** - 
 **Josué Alejandro García Quevedo**
 
 Proyecto desarrollado con fines académicos como una propuesta tecnológica para la exploración, análisis y visualización de información territorial y turística de El Salvador.
