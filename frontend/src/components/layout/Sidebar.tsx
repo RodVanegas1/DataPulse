@@ -62,10 +62,6 @@ export function Sidebar({ active, onChange, open, onClose }: SidebarProps) {
           })}
         </nav>
 
-        <div className="absolute bottom-5 left-4 right-4 rounded-lg border border-white/10 bg-white/[0.04] p-4">
-          <p className="text-sm font-semibold text-white">{t('sidebar.pwa_title')}</p>
-          <p className="mt-1 text-xs leading-5 text-steel-500">{t('sidebar.pwa_detail')}</p>
-        </div>
       </aside>
     </>
   );
