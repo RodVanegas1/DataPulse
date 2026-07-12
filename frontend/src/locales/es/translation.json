@@ -1,0 +1,147 @@
+{
+  "common": {
+    "loading": "Cargando",
+    "search_placeholder": "Buscar territorios, capas, reportes",
+    "no_data": "No hay datos disponibles",
+    "no_data_current_filters": "No hay información disponible para los filtros actuales."
+  },
+  "nav": {
+    "dashboard": "Inicio",
+    "map": "Mapa interactivo",
+    "analytics": "Analítica territorial",
+    "reports": "Reportes",
+    "datasets": "Conjuntos de datos",
+    "assistant": "Asistente IA",
+    "downloads": "Descargas",
+    "about": "Acerca de",
+    "settings": "Configuración visual"
+  },
+  "sidebar": {
+    "pwa_title": "Lista para PWA",
+    "pwa_detail": "El manifiesto, la estructura responsiva y los datos de respaldo sin conexión ya están preparados."
+  },
+  "topbar": {
+    "language": "Idioma",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "filters": {
+    "eyebrow": "Filtros sincronizados",
+    "title": "Consulta territorial",
+    "reset": "Reiniciar",
+    "search_geo": "Búsqueda y geografía",
+    "search_label": "Buscar",
+    "search_placeholder": "turismo, volcán, cultura",
+    "department_label": "Departamento",
+    "all_departments": "Todos los departamentos",
+    "municipality_label": "Municipio",
+    "municipality_placeholder": "código de municipio",
+    "district_label": "Distrito",
+    "district_placeholder": "filtro de distrito futuro",
+    "categories_tags": "Categorías y etiquetas",
+    "layer_categories": "Categorías de capas",
+    "tags_label": "Etiquetas",
+    "tags_placeholder": "Presiona Enter para agregar una etiqueta",
+    "date_range": "Rango de fechas",
+    "from": "Desde",
+    "to": "Hasta",
+    "active_filters": "filtros activos",
+    "none": "Ningún",
+    "open_start": "Inicio abierto",
+    "open_end": "Fin abierto",
+    "remove_tag": "Eliminar etiqueta"
+  },
+  "assistant": {
+    "title": "Asistente IA",
+    "subtitle": "Impulsado por el backend, agnóstico de proveedor",
+    "welcome": "Hola. Soy el asistente territorial de {{product}}. Puedo ayudarte a interpretar regiones, indicadores, mapas y reportes usando el backend AI Gateway.",
+    "clear": "Limpiar conversación",
+    "close": "Cerrar asistente",
+    "placeholder": "Pregunta sobre regiones, tendencias, riesgos...",
+    "send": "Enviar",
+    "provider": "Proveedor",
+    "prompt_1": "Compara oportunidades turísticas entre La Libertad y Santa Ana.",
+    "prompt_2": "¿Qué municipios muestran potencial de inversión?",
+    "prompt_3": "Resume los aspectos ambientales de las capas actuales.",
+    "toggle": "Mostrar u ocultar asistente"
+  },
+  "dashboard": {
+    "places": "Lugares",
+    "places_detail": "Activos territoriales publicados",
+    "departments": "Departamentos",
+    "departments_detail": "Cobertura administrativa",
+    "municipalities": "Municipios",
+    "municipalities_detail": "Granularidad regional",
+    "categories": "Categorías",
+    "categories_detail": "Taxonomía intersectorial",
+    "map_layers": "Capas del mapa",
+    "map_layers_detail": "Superposiciones listas para SIG",
+    "featured": "Destacados",
+    "featured_detail": "Lugares listos para promoción",
+    "datasets": "Conjuntos de datos",
+    "datasets_detail": "Catálogo de datos abiertos",
+    "events": "Eventos",
+    "events_detail": "Señales listas para calendario",
+    "signals_title": "Señales ejecutivas",
+    "signals_eyebrow": "Insights"
+  },
+  "analytics": {
+    "trend_title": "Preparación de tendencias y proyecciones",
+    "trend_eyebrow": "Motor de analítica"
+  },
+  "charts": {
+    "regional_title": "Comparación regional",
+    "regional_eyebrow": "Departamentos",
+    "category_title": "Estadísticas de categorías",
+    "category_eyebrow": "Taxonomía turística"
+  },
+  "datasets_page": {
+    "title": "Conjuntos de datos abiertos",
+    "eyebrow": "Catálogo",
+    "empty": "Aún no hay conjuntos de datos públicos disponibles."
+  },
+  "reports_page": {
+    "engine_title": "Motor de reportes",
+    "engine_eyebrow": "Exportaciones",
+    "recent_title": "Reportes recientes",
+    "recent_eyebrow": "Catálogo",
+    "empty": "Aún no se han generado reportes."
+  },
+  "settings_page": {
+    "title": "Configuración visual",
+    "eyebrow": "Vista previa",
+    "dark_theme": "Tema oscuro",
+    "dark_theme_detail": "Tema de presentación predeterminado",
+    "high_contrast": "Mapa de alto contraste",
+    "high_contrast_detail": "Preparado para ajustes de accesibilidad"
+  },
+  "about_page": {
+    "eyebrow": "Plataforma de Inteligencia Territorial",
+    "description_suffix": "El frontend está diseñado para acceso público, presentaciones institucionales, flujos de trabajo SIG, tableros, reportes, conjuntos de datos y exploración asistida por IA.",
+    "badge_api": "API pública abierta",
+    "badge_responsive": "Web responsiva",
+    "badge_pwa": "Lista para PWA",
+    "badge_osm": "OpenStreetMap",
+    "badge_leaflet": "Leaflet",
+    "badge_maplibre": "Arquitectura MapLibre",
+    "badge_cesium": "Arquitectura CesiumJS",
+    "roadmap_title": "Arquitectura SIG preparada para el futuro",
+    "roadmap_eyebrow": "Hoja de ruta",
+    "roadmap_satellite": "Proveedores de imágenes satelitales",
+    "roadmap_scenes": "Escenas 3D fotorrealistas",
+    "roadmap_terrain": "Visualización de terreno y elevación",
+    "roadmap_detail": "El módulo del mapa aísla las responsabilidades del proveedor para que futuros motores puedan integrarse sin reemplazar los flujos del tablero."
+  },
+  "app": {
+    "loading": "Cargando",
+    "fallback_banner": "Algunos endpoints del backend no están disponibles, por lo que se usan datos de respaldo seguros para la presentación.",
+    "fallback_badge": "fuentes de respaldo",
+    "map_controls_title": "Operaciones del mapa",
+    "map_controls_eyebrow": "Controles",
+    "map_controls_detail": "El panel del mapa permanece visible en toda la aplicación. Usa la vista de mapa expandida a la derecha para controles de capas, mapa base satelital, agrupamiento, densidad de mapa de calor y superposiciones de puntos administrativos.",
+    "assistant_card_title": "Asistente IA",
+    "assistant_card_eyebrow": "Puerta de enlace del backend",
+    "assistant_card_detail": "El asistente consume únicamente `/api/v1/ai/generate`. En escritorio, el panel en vivo está anclado a la derecha. En móvil, usa el botón flotante para abrir una conversación en pantalla completa.",
+    "open_assistant": "Abrir asistente"
+  }
+}
