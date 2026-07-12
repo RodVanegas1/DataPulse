@@ -1,0 +1,83 @@
+import swaggerJSDoc from 'swagger-jsdoc';
+import { config } from '../config/env';
+
+export const openApiSpec = swaggerJSDoc({
+  definition: {
+    openapi: '3.0.3',
+    info: {
+      title: config.APP_NAME,
+      version: config.APP_VERSION,
+      description: 'Public API for tourism, territorial intelligence, GIS layers, analytics, reports, datasets, and AI abstractions.',
+    },
+    tags: [
+      { name: 'Health' },
+      { name: 'Platform' },
+      { name: 'Geography' },
+      { name: 'Tourism' },
+      { name: 'Layers' },
+      { name: 'Search' },
+      { name: 'Analytics' },
+      { name: 'Dashboard' },
+      { name: 'Insights' },
+      { name: 'Maps' },
+      { name: 'Reports' },
+      { name: 'Exports' },
+      { name: 'Datasets' },
+      { name: 'AI Gateway' },
+    ],
+    servers: [{ url: config.API_PREFIX }],
+    components: {
+      schemas: {
+        ApiEnvelope: {
+          type: 'object',
+          properties: {
+            success: { type: 'boolean' },
+            message: { type: 'string' },
+            data: { type: 'object' },
+            meta: { type: 'object' },
+            pagination: { type: 'object', nullable: true },
+          },
+        },
+      },
+    },
+    paths: {
+      '/health': { get: { tags: ['Health'], summary: 'API health check', responses: { 200: { description: 'Healthy service' } } } },
+      '/platform': { get: { tags: ['Platform'], summary: 'Platform registry', responses: { 200: { description: 'Enabled modules and engines' } } } },
+      '/platform/config': { get: { tags: ['Platform'], summary: 'Frontend-ready platform configuration', responses: { 200: { description: 'Public configuration' } } } },
+      '/geography/departments': { get: { tags: ['Geography'], summary: 'List departments with municipalities', responses: { 200: { description: 'Departments' } } } },
+      '/geography/municipalities': { get: { tags: ['Geography'], summary: 'List municipalities', parameters: [{ name: 'departmentSlug', in: 'query', schema: { type: 'string' } }], responses: { 200: { description: 'Municipalities' } } } },
+      '/tourism/places': {
+        get: { tags: ['Tourism'], summary: 'List tourism places with pagination and filters', responses: { 200: { description: 'Tourism places' } } },
+        post: { tags: ['Tourism'], summary: 'Create tourism place; requires x-api-key when API_KEY is set', responses: { 201: { description: 'Created place' }, 401: { description: 'Missing API key' } } },
+      },
+      '/tourism/places/{slug}': { get: { tags: ['Tourism'], summary: 'Get tourism place by slug', parameters: [{ name: 'slug', in: 'path', required: true, schema: { type: 'string' } }], responses: { 200: { description: 'Tourism place' }, 404: { description: 'Not found' } } } },
+      '/tourism/places/{id}': {
+        patch: { tags: ['Tourism'], summary: 'Update tourism place; requires x-api-key when API_KEY is set', parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }], responses: { 200: { description: 'Updated place' } } },
+        delete: { tags: ['Tourism'], summary: 'Delete tourism place; requires x-api-key when API_KEY is set', parameters: [{ name: 'id', in: 'path', required: true, schema: { type: 'string' } }], responses: { 200: { description: 'Deleted place' } } },
+      },
+      '/tourism/categories': { get: { tags: ['Tourism'], summary: 'List tourism categories', responses: { 200: { description: 'Categories' } } } },
+      '/layers': { get: { tags: ['Layers'], summary: 'List map layers', parameters: [{ name: 'enabled', in: 'query', schema: { type: 'boolean' } }], responses: { 200: { description: 'Layers' } } } },
+      '/layers/{slug}': { get: { tags: ['Layers'], summary: 'Get layer details', parameters: [{ name: 'slug', in: 'path', required: true, schema: { type: 'string' } }], responses: { 200: { description: 'Layer' } } } },
+      '/layers/{slug}/geojson': { get: { tags: ['Layers'], summary: 'Get layer GeoJSON', parameters: [{ name: 'slug', in: 'path', required: true, schema: { type: 'string' } }], responses: { 200: { description: 'GeoJSON' } } } },
+      '/search': { get: { tags: ['Search'], summary: 'Reusable search with text, geography, category, tags, radius, sorting and pagination', responses: { 200: { description: 'Search results' } } } },
+      '/search/autocomplete': { get: { tags: ['Search'], summary: 'Autocomplete-ready suggestions', responses: { 200: { description: 'Suggestions' } } } },
+      '/analytics/dashboard': { get: { tags: ['Analytics'], summary: 'Dashboard analytics', responses: { 200: { description: 'Dashboard analytics' } } } },
+      '/analytics/indicators': { get: { tags: ['Analytics'], summary: 'KPIs, category statistics, and regional comparisons', responses: { 200: { description: 'Indicators' } } } },
+      '/analytics/heatmap': { get: { tags: ['Analytics'], summary: 'Tourism heatmap GeoJSON', responses: { 200: { description: 'Heatmap' } } } },
+      '/analytics/insights': { get: { tags: ['Analytics'], summary: 'Territorial insights with evidence', responses: { 200: { description: 'Insights' } } } },
+      '/dashboard/overview': { get: { tags: ['Dashboard'], summary: 'Frontend dashboard cards, charts, map summary, and recent content', responses: { 200: { description: 'Dashboard overview' } } } },
+      '/insights': { get: { tags: ['Insights'], summary: 'Public territorial insights', responses: { 200: { description: 'Insights' } } } },
+      '/maps/config': { get: { tags: ['Maps'], summary: 'Interactive map configuration for OpenStreetMap, Leaflet, and MapLibre', responses: { 200: { description: 'Map config' } } } },
+      '/maps/heatmap': { get: { tags: ['Maps'], summary: 'Map heatmap layer', responses: { 200: { description: 'Heatmap' } } } },
+      '/reports/tourism-places': { get: { tags: ['Reports'], summary: 'Generate tourism report as json, csv, excel, pdf, or geojson', responses: { 200: { description: 'Report file or JSON' } } } },
+      '/exports/formats': { get: { tags: ['Exports'], summary: 'List supported export formats', responses: { 200: { description: 'Export formats' } } } },
+      '/exports/tourism-places': { get: { tags: ['Exports'], summary: 'Generate tourism export as json, csv, excel, pdf, or geojson', responses: { 200: { description: 'Export file or JSON' } } } },
+      '/datasets': { get: { tags: ['Datasets'], summary: 'List public datasets', responses: { 200: { description: 'Datasets' } } } },
+      '/datasets/import-capabilities': { get: { tags: ['Datasets'], summary: 'Dataset import connector capabilities', responses: { 200: { description: 'Capabilities' } } } },
+      '/datasets/validate-import': { post: { tags: ['Datasets'], summary: 'Validate dataset import payload; requires x-api-key when API_KEY is set', responses: { 200: { description: 'Validation result' } } } },
+      '/datasets/{slug}/export': { get: { tags: ['Datasets'], summary: 'Export dataset as json, geojson, or csv', parameters: [{ name: 'slug', in: 'path', required: true, schema: { type: 'string' } }], responses: { 200: { description: 'Dataset export' } } } },
+      '/ai/generate': { post: { tags: ['AI Gateway'], summary: 'Unified AI generation endpoint with mock, Ollama, LM Studio, Gemini, and OpenRouter providers', responses: { 200: { description: 'AI response' } } } },
+    },
+  },
+  apis: ['src/modules/**/*.ts'],
+});

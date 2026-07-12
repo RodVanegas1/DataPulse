@@ -1,0 +1,147 @@
+{
+  "common": {
+    "loading": "Loading",
+    "search_placeholder": "Search territories, layers, reports",
+    "no_data": "No data available",
+    "no_data_current_filters": "No insights are available for the current filters."
+  },
+  "nav": {
+    "dashboard": "Home",
+    "map": "Interactive Map",
+    "analytics": "Territorial Analytics",
+    "reports": "Reports",
+    "datasets": "Datasets",
+    "assistant": "AI Assistant",
+    "downloads": "Downloads",
+    "about": "About",
+    "settings": "Visual Settings"
+  },
+  "sidebar": {
+    "pwa_title": "PWA Ready",
+    "pwa_detail": "Manifest, responsive shell, and offline-ready data fallbacks are prepared."
+  },
+  "topbar": {
+    "language": "Language",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "filters": {
+    "eyebrow": "Synchronized filters",
+    "title": "Territorial query",
+    "reset": "Reset",
+    "search_geo": "Search and geography",
+    "search_label": "Search",
+    "search_placeholder": "tourism, volcano, culture",
+    "department_label": "Department",
+    "all_departments": "All departments",
+    "municipality_label": "Municipality",
+    "municipality_placeholder": "municipality slug",
+    "district_label": "District",
+    "district_placeholder": "future district filter",
+    "categories_tags": "Categories and tags",
+    "layer_categories": "Layer categories",
+    "tags_label": "Tags",
+    "tags_placeholder": "Press Enter to add a tag",
+    "date_range": "Date range",
+    "from": "From",
+    "to": "To",
+    "active_filters": "active filters",
+    "none": "No",
+    "open_start": "Open start",
+    "open_end": "Open end",
+    "remove_tag": "Remove tag"
+  },
+  "assistant": {
+    "title": "AI Assistant",
+    "subtitle": "Backend-powered, provider-agnostic",
+    "welcome": "Hello. I am the territorial assistant of {{product}}. I can help you interpret regions, indicators, maps and reports using the AI Gateway backend.",
+    "clear": "Clear conversation",
+    "close": "Close assistant",
+    "placeholder": "Ask about regions, trends, risks...",
+    "send": "Send",
+    "provider": "Provider",
+    "prompt_1": "Compare tourism opportunities between La Libertad and Santa Ana.",
+    "prompt_2": "What municipalities show investment potential?",
+    "prompt_3": "Summarize environmental insights from current layers.",
+    "toggle": "Toggle assistant"
+  },
+  "dashboard": {
+    "places": "Places",
+    "places_detail": "Published territorial assets",
+    "departments": "Departments",
+    "departments_detail": "Administrative coverage",
+    "municipalities": "Municipalities",
+    "municipalities_detail": "Regional granularity",
+    "categories": "Categories",
+    "categories_detail": "Cross-sector taxonomy",
+    "map_layers": "Map layers",
+    "map_layers_detail": "GIS-ready overlays",
+    "featured": "Featured",
+    "featured_detail": "Promotion-ready places",
+    "datasets": "Datasets",
+    "datasets_detail": "Open data catalog",
+    "events": "Events",
+    "events_detail": "Calendar-ready signals",
+    "signals_title": "Executive signals",
+    "signals_eyebrow": "Insights"
+  },
+  "analytics": {
+    "trend_title": "Trend and projection readiness",
+    "trend_eyebrow": "Analytics engine"
+  },
+  "charts": {
+    "regional_title": "Regional comparison",
+    "regional_eyebrow": "Departments",
+    "category_title": "Category statistics",
+    "category_eyebrow": "Tourism taxonomy"
+  },
+  "datasets_page": {
+    "title": "Open datasets",
+    "eyebrow": "Catalog",
+    "empty": "No public datasets are available yet."
+  },
+  "reports_page": {
+    "engine_title": "Report engine",
+    "engine_eyebrow": "Exports",
+    "recent_title": "Recent reports",
+    "recent_eyebrow": "Catalog",
+    "empty": "No reports have been generated yet."
+  },
+  "settings_page": {
+    "title": "Visual settings",
+    "eyebrow": "Preview",
+    "dark_theme": "Dark theme",
+    "dark_theme_detail": "Default presentation theme",
+    "high_contrast": "High contrast map",
+    "high_contrast_detail": "Prepared for accessibility tuning"
+  },
+  "about_page": {
+    "eyebrow": "Territorial Intelligence Platform",
+    "description_suffix": "The frontend is designed for public access, institutional presentations, GIS workflows, dashboards, reports, datasets, and AI-assisted exploration.",
+    "badge_api": "Open public API",
+    "badge_responsive": "Responsive web",
+    "badge_pwa": "PWA ready",
+    "badge_osm": "OpenStreetMap",
+    "badge_leaflet": "Leaflet",
+    "badge_maplibre": "MapLibre architecture",
+    "badge_cesium": "CesiumJS architecture",
+    "roadmap_title": "Future-ready GIS architecture",
+    "roadmap_eyebrow": "Roadmap",
+    "roadmap_satellite": "Satellite imagery providers",
+    "roadmap_scenes": "Photorealistic 3D scenes",
+    "roadmap_terrain": "Terrain and elevation visualization",
+    "roadmap_detail": "The map module isolates provider concerns so future engines can be introduced without replacing dashboard workflows."
+  },
+  "app": {
+    "loading": "Loading",
+    "fallback_banner": "Some backend endpoints are unavailable, so presentation-safe fallback data is active.",
+    "fallback_badge": "fallback sources",
+    "map_controls_title": "Map operations",
+    "map_controls_eyebrow": "Controls",
+    "map_controls_detail": "The map panel remains visible across the product. Use the expanded map view on the right for layer controls, satellite basemap, clustering, heatmap density, and administrative point overlays.",
+    "assistant_card_title": "AI Assistant",
+    "assistant_card_eyebrow": "Backend gateway",
+    "assistant_card_detail": "The assistant consumes only `/api/v1/ai/generate`. On desktop, the live panel is docked on the right. On mobile, use the floating button to open a full-screen conversation.",
+    "open_assistant": "Open assistant"
+  }
+}
