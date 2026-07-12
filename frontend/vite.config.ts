@@ -7,18 +7,10 @@ export default defineConfig({
     port: 5173,
   },
   preview: {
+    host: '0.0.0.0',
     port: 4173,
   },
   build: {
     chunkSizeWarningLimit: 900,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          maps: ['leaflet', 'leaflet.markercluster', 'leaflet.heat'],
-          charts: ['recharts'],
-          markdown: ['react-markdown'],
-        },
-      },
-    },
   },
 });
