@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Expand, Layers, LocateFixed, Minimize2, Satellite, ThermometerSun } from 'lucide-react';
-import * as L from 'leaflet';
+import L from 'leaflet';
+import 'leaflet.markercluster';
+import 'leaflet.heat';
 import 'leaflet.markercluster';
 import 'leaflet.heat';
 import type { FeatureCollection, MapConfig, SearchFilters } from '../../lib/types';
