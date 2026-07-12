@@ -354,7 +354,7 @@ Proyecto desarrollado con fines académicos como una propuesta tecnológica para
 
 ---
 
-# 📄 Licencia
+# Licencia
 
 Este proyecto fue desarrollado con fines académicos y de innovación tecnológica.
 
