@@ -9,7 +9,7 @@ const envSchema = z.object({
   API_PREFIX: z.string().default('/api/v1'),
   APP_NAME: z.string().default('Territorial Intelligence Platform API'),
   APP_VERSION: z.string().default('0.1.0'),
-  DATABASE_URL: z.string().url(),
+  DATABASE_URL: z.string().min(1),
   API_KEY: z.string().optional(),
   CORS_ORIGIN: z.string().default('*'),
   RATE_LIMIT_WINDOW_MS: z.coerce.number().int().positive().default(60000),
