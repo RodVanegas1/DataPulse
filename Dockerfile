@@ -1,23 +1,31 @@
-FROM node:20-alpine AS deps
+FROM node:20-slim AS deps
+
 WORKDIR /app
+
 COPY package*.json ./
 RUN npm ci
 
-FROM node:20-alpine AS build
+FROM node:20-slim AS build
+
 WORKDIR /app
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm run prisma:generate
+
+RUN npx prisma generate
 RUN npm run build
 
-FROM node:20-alpine AS runner
+FROM node:20-slim
+
 WORKDIR /app
+
 ENV NODE_ENV=production
-RUN addgroup -S nodejs && adduser -S nodejs -G nodejs
+
 COPY package*.json ./
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/prisma ./prisma
-USER nodejs
+
 EXPOSE 4000
-CMD ["node", "dist/src/server.js"]
+
+CMD ["npm","start"]

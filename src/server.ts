@@ -3,23 +3,50 @@ import { createApp } from './app';
 import { prisma } from './shared/database/prisma';
 import { logger } from './shared/logger/logger';
 
-const app = createApp();
+async function bootstrap() {
+  try {
+    console.log("=================================");
+    console.log("🚀 Iniciando La Olla de Datos API");
+    console.log("=================================");
 
-const server = app.listen(config.PORT, () => {
-  logger.info(`${config.APP_NAME} listening`, {
-    port: config.PORT,
-    environment: config.NODE_ENV,
-    prefix: config.API_PREFIX,
-  });
-});
+    console.log("Conectando a PostgreSQL...");
 
-const shutdown = async () => {
-  logger.info('Shutting down API server');
-  server.close(async () => {
-    await prisma.$disconnect();
-    process.exit(0);
-  });
-};
+    await prisma.$connect();
 
-process.on('SIGINT', shutdown);
-process.on('SIGTERM', shutdown);
+    console.log("✅ PostgreSQL conectado correctamente");
+
+    const app = createApp();
+
+    const server = app.listen(config.PORT, "0.0.0.0", () => {
+      logger.info(`${config.APP_NAME} iniciado`, {
+        port: config.PORT,
+        environment: config.NODE_ENV,
+      });
+
+      console.log("=================================");
+      console.log(`✅ Servidor escuchando en ${config.PORT}`);
+      console.log("=================================");
+    });
+
+    const shutdown = async () => {
+      console.log("Cerrando servidor...");
+
+      server.close(async () => {
+        await prisma.$disconnect();
+        process.exit(0);
+      });
+    };
+
+    process.on("SIGINT", shutdown);
+    process.on("SIGTERM", shutdown);
+
+  } catch (error) {
+    console.error("=================================");
+    console.error("❌ ERROR DURANTE EL ARRANQUE");
+    console.error(error);
+    console.error("=================================");
+    process.exit(1);
+  }
+}
+
+bootstrap();
