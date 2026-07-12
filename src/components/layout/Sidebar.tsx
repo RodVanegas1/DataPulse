@@ -26,7 +26,7 @@ export function Sidebar({ active, onChange, open, onClose }: SidebarProps) {
         <div className="flex items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-lg bg-pulse-cyan text-sm font-black text-ink-950">OD</div>
+              <img src="/icons/icon.svg" alt="LA OLLA DE DATOS" className="h-12 w-12 object-contain" />
               <div className="min-w-0">
                 <h1 className="truncate text-lg font-bold text-white">{PRODUCT_NAME}</h1>
                 <p className="truncate text-xs text-steel-500">{PRODUCT_TAGLINE}</p>
